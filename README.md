@@ -12,3 +12,7 @@ Scripts have to be run in the following way:
 4- python test_resting.py
 # generate the plots
 5- python generate_plots.py
+
+Software required to run all the scripts:
+
+python 2, numpy, pandas, scikit-learn, keras, nilearn
