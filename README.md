@@ -2,7 +2,13 @@
 
 
 ## Description:
+Code written in python and used for downloading and preprocessing the data and generating results and plots of the work that can be found in the link...
 
+## Software Requirements:
+
+python 2, numpy, pandas, scikit-learn, keras 2.0, nilearn
+
+## Usage:
 Scripts have to be run in the following way:
 
 1. Download and preprocess resting fmri:
@@ -16,6 +22,7 @@ Scripts have to be run in the following way:
 5. Generate the plots
 *python generate_plots.py*
 
-Software required to run all the scripts:
 
-python 2, numpy, pandas, scikit-learn, keras, nilearn
+Please do not hesitate to contact us for any issue running the code, suggestions and remarks to jrasero.daparte@gmail.com
+
+
