@@ -1,6 +1,6 @@
 # 0. Select backend (theano or tensorflow) and outfile name for data and model
 backend='theano'
-out_file='task_tr_resting_ts_' 
+out_file='task_tr_resting_ts' 
 batch_size = 128
 epochs = 500
 drop=0.2;
@@ -73,10 +73,10 @@ TT = label_binarize(y,classes=[1,2,3,4,5,6,7,8,9])
 
 n_test=int(XX.shape[0])
 
-np.random.seed(seed)
 index = np.arange(n_test)
 index = shuffle(index)
 
+#save these numbers for further analysising and generation the plots 
 np.save(fold_model + 'shuffl_ind_rest_test', index)
 
 X_test = XX[index,:].astype(np.float32)
@@ -99,7 +99,7 @@ for k in to_do :
     for j in n_trials :
         test_nan=True
         time_start=time.clock()
-        outfile = out_file+'_'+str(k)+str(j)
+        outfile = out_file
         while test_nan :
             # 7. Define model architecture
             print('out_file=', outfile)
