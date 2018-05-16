@@ -6,10 +6,10 @@ Code written in python and used for downloading and preprocessing the data and g
 
 ## Software Requirements:
 
-python 2, numpy, pandas, scikit-learn, keras 2.0, nilearn
+python 2.7, numpy, pandas, scikit-learn, keras 2.0, nilearn
 
 ## Usage:
-Scripts have to be run in the following way:
+Scripts have to be run in the following way (steps 1,2 and 3 are to be run in a cluster given the time of computation):
 
 1. Download and preprocess resting fmri:
  *sh shen_time_series_native_fmri_icafix.sh*
@@ -19,7 +19,7 @@ Scripts have to be run in the following way:
 *python cross_validation_main.py*
 4. Train on task and predict on resting after best model selected from previous step: 
 *python test_resting.py*
-5. Generate the plots
+5. Generate the plots (Figure 1 of the paper was included using Libreoffice Impress)
 *python generate_plots.py*
 
 
