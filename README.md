@@ -2,7 +2,11 @@
 
 
 ## Description:
-Code written in python and used for downloading and preprocessing the data and generating results and plots of the work that can be found in the link:https://doi.org/10.1101/259077
+Code written in python and used for downloading and preprocessing the data and generating results and plots of the work:
+
+**Predicting functional networks from region connectivity profiles in task-based versus resting-state fMRI data**  
+*Javier Rasero, Hannelore Aerts, Marlis Ontivero Ortega, Jesus M. Cortes, Sebastiano Stramaglia, Daniele Marinazzo*  
+bioRxiv 259077, that can be found in the link: https://doi.org/10.1101/259077
 
 ## Software Requirements:
 
