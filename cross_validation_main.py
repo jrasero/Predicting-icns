@@ -1,40 +1,39 @@
-#essentials
-import numpy as np
-import pandas as pd
-import os
-
 ##############################
-
 print('loading libraries and modules used...')
-execfile('imports.py')
+execfile('src/imports.py')
 print('end loading libraries and modules...')
 
 ##############################
 
 print('loading data to analyse...')
-execfile('load_data.py')
+execfile('src/load_data.py')
 print('done loading data...')
 
 ##############################
 
 print('Starting neural networks...')
-execfile('results_nn.py')
-print('neural networks end...')
+execfile('src/results_nn.py')
+print('neural networks ended...')
 
 ##############################
 
 print('Starting RF OVR...')
-execfile('rfr_ovr.py')
-print('RF OVR end...')
+execfile('src/rf_ovr.py')
+print('RF OVR ended...')
 
 ##############################
 
 print('Starting RF multiclass...')
-execfile('rfr_multi.py')
-print('RF multiclass end...')
+execfile('src/rf_multi.py')
+print('RF multiclass ended...')
 
 ##############################
 
 print('Starting SVM OVR...')
-execfile('svm_ovr.py')
-print('SVM OVR end...')
+execfile('src/svm_ovr.py')
+print('SVM OVR ended...')
+
+##############################
+print('Starting QDA...')
+execfile('src/qda.py')
+print('QDA ended...')
