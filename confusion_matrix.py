@@ -1,11 +1,3 @@
-#!/usr/bin/env python2
-# -*- coding: utf-8 -*-
-"""
-Created on Wed Oct 18 09:52:47 2017
-
-@author: javi
-"""
-
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
@@ -16,7 +8,7 @@ import itertools
 def plot_confusion_matrix(cm, cm_std, classes,
                           normalize=False,
                           title='Confusion matrix',
-                          cmap=plt.cm.Blues):
+                          cmap=plt.cm.Blues, **kwarg):
     """
     This function prints and plots the confusion matrix.
     Normalization can be applied by setting `normalize=True`.
@@ -38,20 +30,20 @@ def plot_confusion_matrix(cm, cm_std, classes,
     cm_std = np.round(cm_std, decimals = 2)
     
     plt.imshow(cm, interpolation='nearest', cmap=cmap)
-    plt.title(title)
+    plt.title(title, size=20)
     #plt.colorbar()
     tick_marks = np.arange(len(classes))
-    plt.xticks(tick_marks, classes, rotation=45)
-    plt.yticks(tick_marks, classes)
+    plt.xticks(tick_marks, classes, rotation=45, weight='bold')
+    plt.yticks(tick_marks, classes, weight='bold')
 
     
     thresh = cm.max() / 2.
     for i, j in itertools.product(range(cm.shape[0]), range(cm.shape[1])):
         plt.text(j, i, cm[i, j],
-                 horizontalalignment="center",size = 'x-small',
+                 horizontalalignment="center",size = 5, fontdict={'weight':'bold'},
                  color="white" if cm[i, j] > thresh else "black")
 
     plt.tight_layout()
-    plt.ylabel('True label')
-    plt.xlabel('Predicted label')
+    plt.ylabel('True label', size=15)
+    plt.xlabel('Predicted label', size=15)
     
