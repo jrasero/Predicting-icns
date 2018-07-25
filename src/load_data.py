@@ -19,7 +19,7 @@ num_classes = len(np.unique(labels))
 print(" ")
 print('generating the shuffles to be used by all the models fitted..')
 
-rkf=model_selection.RepeatedKFold(n_splits=5, n_repeats=10, random_state=seed)
+rkf=model_selection.RepeatedKFold(n_splits=10, n_repeats=5, random_state=seed)
 
 index_subjects = range(n_subjects)
 train_index_list=[]
