@@ -176,11 +176,14 @@ hm = sns.heatmap(task_corr,square=True,cbar_kws={"shrink": .6},
 x=0
 y=0
 w = [sum(yeoROIs==i) for i in range(9)]
+y_tick_label = []
 for i in range(9):
 
     hm.add_patch(mpatches.Rectangle((x,y), w[i], w[i], fill=False,edgecolor='k',lw=3))
+    y_tick_label.append(y+(w[i]/2)) #to add then the labels to y axis
     x= x + w[i]
     y = y+w[i]
+    
 dat_to_plot=[]
 for i, name in enumerate(class_names):
     rsn_inds = np.where(np.sort(yeoROIs)==i)
@@ -188,6 +191,8 @@ for i, name in enumerate(class_names):
     #take upper off diagonal terms
     dat_to_plot.append(mat[np.triu_indices(mat.shape[0], k=1)])
 
+ax1.set_yticks(y_tick_label)
+ax1.set_yticklabels(class_names, fontdict={'fontsize':10 ,'fontweight': 'bold'})
 
 ax2=plt.subplot(1, 2, 2)
 x_for_boxplot = [np.repeat(i+1, len(dat_to_plot[i])) for i in range(9)]
@@ -207,13 +212,12 @@ for i,box in enumerate(bp.artists):
 for patch, color in zip(bp.artists, sns.xkcd_palette(colors)):
     patch.set_facecolor(color)
 sns.swarmplot(x =x_for_boxplot, y=y_for_boxplot, size=1.2, color='0.3', ax=ax2)
-bp.set_xticklabels(class_names)
+bp.set_xticklabels(class_names,fontdict={'fontsize':10 ,'fontweight': 'bold'})
 ax2.set_ylim(-0.8,1)
 plt.xticks(rotation=90)
 plt.ylabel("Pearson similarity", size=20,fontweight='bold')
 fig.subplots_adjust(wspace=0.3)
 ax2.set_aspect(4)
-#plt.rcParams["font.weight"] = "bold"
 plt.savefig('plots/cors_mean_patterns.png', dpi=300,bbox_inches='tight')
 plt.savefig('plots/cors_mean_patterns.eps', dpi=300,bbox_inches='tight')
 
