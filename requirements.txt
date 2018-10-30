@@ -3,6 +3,7 @@ python==2.7
 
 # Data preprocessing
 fsl==5.0
+fix==1.065
 
 # Data manipulation
 numpy>=1.14.2
