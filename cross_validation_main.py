@@ -29,9 +29,15 @@ print('RF multiclass ended...')
 
 ##############################
 
-print('Starting SVM OVR...')
-execfile('src/svm_ovr.py')
-print('SVM OVR ended...')
+print('Starting SVM OVR linear kernel...')
+execfile('src/svm_ovr_linear.py')
+print('SVM OVR linear kernel ended...')
+
+##############################
+
+print('Starting SVM OVR rbf kernel...')
+execfile('src/svm_ovr_kernel.py')
+print('SVM OVR rbf kernel ended...')
 
 ##############################
 print('Starting QDA...')
