@@ -1,0 +1,17 @@
+# Compiler
+python==2.7
+
+# Data preprocessing
+fsl==5.0
+
+# Data manipulation
+numpy>=1.14.2
+pandas>=0.22.0
+
+# Formal analysis
+scikit-learn>=0.19.2
+keras>=1.2.2
+
+# Plotting
+nilearn>=0.4.1
+matplotlib>=2.2.2
