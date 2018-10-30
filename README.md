@@ -10,10 +10,10 @@ bioRxiv 259077, that can be found in the link: https://doi.org/10.1101/259077
 
 ## Software Requirements:
 
-python 2.7, numpy, pandas, scikit-learn, keras 2.0, nilearn
+python 2.7, numpy, pandas, scikit-learn, keras 2.0, nilearn, fsl and FIX
 
 ## Usage:
-Scripts have to be run in the following way (steps 1,2 and 3 are to be run in a cluster given the time of computation):
+Scripts have to be run in the following order (steps 1, 2 and 3 are to be run in a cluster given the time of computation):
 
 1. Download and preprocess resting fmri:
  *sh shen_time_series_native_fmri_icafix.sh*
