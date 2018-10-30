@@ -20,9 +20,15 @@ from keras.callbacks import EarlyStopping
 
 # to use in RF, SVM and QDA
 from sklearn import metrics, multiclass
+
 # Support Vector Machines
 from sklearn import svm
+
 # Random Forest
 from sklearn import ensemble
+
 # QDA
 from sklearn import discriminant_analysis
+
+# Kernel approximation to be used before SVM in the non linear case
+from sklearn import kernel_approximation
