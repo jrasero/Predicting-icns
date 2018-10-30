@@ -1,9 +1,13 @@
-fold_model = "./results/svm_ovr/"
+fold_model = "./results/svm_ovr_linear/"
 
 if not os.path.exists(fold_model):
     os.makedirs(fold_model)
     
-clf =svm.LinearSVC(class_weight= 'balanced', verbose = 1, random_state=10)
+
+alphas = 10.0**np.arange(-5,2) 
+
+param_grid = model_selection.ParameterGrid({'alpha': alphas})
+np.save(fold_model + "param_grid.npy",param_grid)
 
 accs = []
 for j in range(rkf.get_n_splits()):
@@ -27,22 +31,27 @@ for j in range(rkf.get_n_splits()):
     Y_true=np.argmax(Y_test,1)
     Yt=np.argmax(Y_train,1)
     
-    feats = [np.zeros(268)]
         
-    clf.fit(X_train,Yt)
+    df = pd.DataFrame(data={'true':Y_true})  
     
-    #Save coefficients
-    io.savemat(fold_model +'coef_fold_' + str(j)+ '.mat', {'coef': clf.coef_})
     
-    yPred = clf.predict(X_test)
-    acc = metrics.accuracy_score(Y_true, yPred)
-    accs.append(acc) 
+    for grid_id, hyp_param in enumerate(param_grid):
+        
+        clf =svm.LinearSVC(class_weight= 'balanced',
+                     C=hyp_param['alpha'],
+                     verbose = 1, 
+                     random_state=10)
+
+        clf.fit(X_train,Yt)
     
-    df = pd.DataFrame(data={'true':Y_true ,'pred': yPred})  
-    
-    #Save predictions
+        
+        yPred = clf.predict(X_test)
+        
+        pred_col = 'pred_grid_' + str(grid_id)  
+        df = pd.concat([df, pd.DataFrame({pred_col: yPred})], axis=1)  
+        
+        
     df.to_csv(fold_model+'res_fold_' +str(j) + '.csv', index = False)
     print('Fold= ', j, ' completed ' )
-    j = j + 1
 
-print('SVM OVR end...')
+print('SVM OVR LINEAR end...')
