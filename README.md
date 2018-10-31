@@ -24,7 +24,7 @@ Scripts have to be run in the following order (steps 1, 2 and 3 are to be run in
 4. Train on task and predict on resting after best model selected from previous step: 
 *python test_resting.py*
 5. Generate the plots (Figure 1 of the paper was included using Libreoffice Impress)
-*python generate_plots.py*
+*python generate_main_plots.py* and *python generate_suppl_plots.py*
 
 
 Please do not hesitate to contact us for any issue running the code, suggestions and remarks to jrasero.daparte@gmail.com
