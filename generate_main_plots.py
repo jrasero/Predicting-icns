@@ -1,6 +1,3 @@
-#############################################
-### Load needed packages and libraries#######
-
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
@@ -46,95 +43,11 @@ list_models=[[268,268,268,268],
              [125]
              ]
 
+# FIGURE 2
+# Manual work: select the best model to plot. 
+# In our case, the best case is neural network [512,256,128,64] 
+# (7th model out of the neural network list)
 
-
-folder_path = './results/task_tr_task_test_nn_models/'
-list_acc=[]
-for i in range(20):
-    acc_temp=[]
-    
-    for j in range(50):
-        results=pd.read_csv(folder_path + 'categorical_'+str(i)+'_'+ str(j)+'_pred.csv')
-        acc_temp.append(metrics.accuracy_score(results['true'].values,results['pred'].values))
-
-    list_acc.append(acc_temp)
-
-
-
-folder_path='./results/qda/'
-acc_m = []
-for i in range(50):
-    res=pd.read_csv(folder_path + 'res_fold_' + str(i)+'.csv')
-    acc_m.append(metrics.accuracy_score(res['true'].values,res['pred'].values))
-
-list_acc.append(acc_m)
-
-
-folder_path='./results/rf_multi/'
-acc_m = []
-for i in range(50):
-    res=pd.read_csv(folder_path + 'res_fold_' + str(i)+'.csv')
-    acc_m.append(metrics.accuracy_score(res['true'].values,res['pred'].values))
-    
-list_acc.append(acc_m)
-
-folder_path='./results/rf_ovr/'
-acc_m = []
-for i in range(50):
-    res=pd.read_csv(folder_path + 'res_fold_' + str(i)+'.csv')
-    acc_m.append(metrics.accuracy_score(res['true'].values,res['pred'].values))
-    
-list_acc.append(acc_m)
-
-folder_path='./results/svm_ovr/'
-acc_m = []
-for i in range(50):
-    res=pd.read_csv(folder_path + 'res_fold_' + str(i)+'.csv')
-    acc_m.append(metrics.accuracy_score(res['true'].values,res['pred'].values))
-    
-list_acc.append(acc_m)
-
-list_xticks=[]
-
-for i in range(20):
-    list_xticks.append('NN:'+str(list_models[i]))
-
-list_xticks.append('QDA')
-list_xticks.append('RF (Multi)')
-list_xticks.append('RF (OVR)')
-list_xticks.append('SVM (OVR)')
-
-#FIGURE 2
-fig, ax = plt.subplots()
-for i in range(4,100,4):
-    temp=np.array(list_acc[int(i/4.0-1)])
-    y_to_plot=[i-1,i-0.5,i,i+0.5,i+1]
-    
-    x_to_plot = [100*np.mean(temp[range(5*j, 5*(j+1))]) for j in range(5)]
-    err_to_plot = [100*np.std(temp[range(5*j, 5*(j+1))]) for j in range(5)]
-
-    ax.errorbar(y=y_to_plot, x=x_to_plot, xerr=err_to_plot, 
-                c=sns.xkcd_rgb["dark salmon"],
-                markersize=2,
-                elinewidth=1,
-                ecolor='g',
-                fmt='o',
-                capthick=2)
-    ax.plot([np.mean(x_to_plot), np.mean(x_to_plot)], [i-1,i+1], lw =3, color='k')
-        
-ax.set_yticks(range(4,100,4))
-ax.set_xticks(range(54,84,2))
-ax.set_xticklabels(range(54,84,2),fontweight='bold')
-ax.set_yticklabels(list_xticks, size='small',fontweight='bold')
-ax.set_title('Motor Task  \n' + '5-Repeated 10-Fold CV',size = 20,fontweight='bold')
-ax.set_ylabel('')
-ax.set_xlabel('Accuracy (%)',size =15,fontweight='bold')
-plt.savefig('plots/accuracies_tfmri_models.png',dpi=300,bbox_inches='tight')
-plt.savefig('plots/accuracies_tfmri_models.eps',dpi=300,bbox_inches='tight')
-
-
-# FIGURE 3
-# We saw that the best case is neural network [512,256,128,64]. We shall focus then on this case (file with 7)
 folder_path = './results/task_tr_task_test_nn_models/'
 name_model = 'categorical_' + str(7)
 list_cm=[]
@@ -152,12 +65,11 @@ cm_std=np.std(list_cm, axis=0)
 
 fig, ax = plt.subplots()
 plot_confusion_matrix(cm_mean, cm_std, classes=class_names, normalize=False,
-                      title='Task-Training \n Task-Test (%)', cmap = plt.cm.YlGn) #plt.cm.Greys f
-plt.savefig('plots/confusion_task_train_task_test.png',dpi=300,bbox_inches='tight')
-plt.savefig('plots/confusion_task_train_task_test.eps',dpi=300,bbox_inches='tight')
+                      title='Task-Training \n Task-Test (%)', cmap = plt.cm.YlGn)
+plt.savefig('plots/Fig2.tiff',dpi=300,bbox_inches='tight')
 
 
-#FIGURE 4
+#FIGURE 3
 yeoROIs=io.loadmat('data/Shen268_yeo_RS7.mat',squeeze_me=True)['yeoROIs']-1
 rsn_ROIs= [class_names[i] for i in yeoROIs]
 
@@ -172,17 +84,17 @@ task_corr = pd.DataFrame(corr_task[np.argsort(yeoROIs),:].transpose()).corr().va
 fig= plt.figure(figsize=(10,5))
 ax1=plt.subplot(1,2,1)
 hm = sns.heatmap(task_corr,square=True,cbar_kws={"shrink": .6},
-                 xticklabels=False,yticklabels=False, cmap=plt.cm.RdBu_r, ax=ax1)
+                 xticklabels=False, yticklabels=True, cmap=plt.cm.RdBu_r, ax=ax1)
 x=0
 y=0
 w = [sum(yeoROIs==i) for i in range(9)]
-y_tick_label = []
+y_ticks=[]
 for i in range(9):
 
     hm.add_patch(mpatches.Rectangle((x,y), w[i], w[i], fill=False,edgecolor='k',lw=3))
-    y_tick_label.append(y+(w[i]/2)) #to add then the labels to y axis
-    x= x + w[i]
-    y = y+w[i]
+    y_ticks.append(y + 0.5*w[i])
+    x = x + w[i]
+    y = y + w[i]
     
 dat_to_plot=[]
 for i, name in enumerate(class_names):
@@ -191,8 +103,8 @@ for i, name in enumerate(class_names):
     #take upper off diagonal terms
     dat_to_plot.append(mat[np.triu_indices(mat.shape[0], k=1)])
 
-ax1.set_yticks(y_tick_label)
-ax1.set_yticklabels(class_names, fontdict={'fontsize':10 ,'fontweight': 'bold'})
+ax1.set_yticks(y_ticks)
+ax1.set_yticklabels(class_names, {'fontweight':'bold'} )
 
 ax2=plt.subplot(1, 2, 2)
 x_for_boxplot = [np.repeat(i+1, len(dat_to_plot[i])) for i in range(9)]
@@ -212,17 +124,15 @@ for i,box in enumerate(bp.artists):
 for patch, color in zip(bp.artists, sns.xkcd_palette(colors)):
     patch.set_facecolor(color)
 sns.swarmplot(x =x_for_boxplot, y=y_for_boxplot, size=1.2, color='0.3', ax=ax2)
-bp.set_xticklabels(class_names,fontdict={'fontsize':10 ,'fontweight': 'bold'})
+bp.set_xticklabels(class_names, {'fontweight':'bold'})
 ax2.set_ylim(-0.8,1)
 plt.xticks(rotation=90)
-plt.ylabel("Pearson similarity", size=20,fontweight='bold')
+plt.ylabel("Pearson similarity", size=20, fontweight='bold')
 fig.subplots_adjust(wspace=0.3)
 ax2.set_aspect(4)
-plt.savefig('plots/cors_mean_patterns.png', dpi=300,bbox_inches='tight')
-plt.savefig('plots/cors_mean_patterns.eps', dpi=300,bbox_inches='tight')
+plt.savefig('plots/Fig3.tiff',dpi=300,bbox_inches='tight')
 
-
-#FIGURE 5
+#FIGURE 4
 list_cm=[]
 for i in range(50):
     results=pd.read_csv('./results/task_tr_rest_tr/task_tr_resting_ts_'+str(i)+'_pred.csv')
@@ -239,12 +149,9 @@ cm_std=np.std(list_cm, axis=0)
 fig, ax = plt.subplots()
 plot_confusion_matrix(cm_mean, np.zeros((9,9)), classes=class_names, normalize=False,
                       title='Task-Training \n Resting-Test (%)', cmap = plt.cm.YlGn)
-plt.savefig('plots/confusion_task_train_rest_test.png',dpi=300,bbox_inches='tight')
-plt.savefig('plots/confusion_task_train_rest_test.eps',dpi=300,bbox_inches='tight')
+plt.savefig('plots/Fig4.tiff',dpi=300,bbox_inches='tight')
 
-
-
-#FIGURE 6
+#FIGURE 5
 list_scores=[]
 list_res =[]
 for i in range(50):
@@ -297,11 +204,9 @@ plt.xticks(fontweight='bold')
 plt.yticks(fontweight='bold')
 plt.xlim([-0.05,1.05])
 plt.ylim([-0.05,1.05])
-plt.savefig('./plots/ROC_curves.png', dpi=300,bbox_inches='tight')
-plt.savefig('./plots/ROC_curves.eps', dpi=300,bbox_inches='tight')
+plt.savefig('plots/Fig5.tiff',dpi=300,bbox_inches='tight')
 
-
-#FIGURE 7
+#FIGURE 6
 
 rec_model = np.array([metrics.recall_score(list_res[i][:,1],list_res[i][:,0],average =None) for i in range(50)])
 prec_model = np.array([metrics.precision_score(list_res[i][:,1],list_res[i][:,0],average =None) for i in range(50)])
@@ -343,11 +248,11 @@ plt.xticks(fontweight='bold')
 plt.yticks(fontweight='bold')
 plt.xlim([-0.05,1.05])
 plt.ylim([-0.05,1.05])
-plt.savefig('./plots/PR_curves.png', dpi=300,bbox_inches='tight')
-plt.savefig('./plots/PR_curves.eps', dpi=300,bbox_inches='tight')
+plt.savefig('plots/Fig6.tiff',dpi=300,bbox_inches='tight')
 
 
-#FIGURE 8
+#FIGURE 7
+# Manual Work: All these pieces are then put together using inkscape
 rsn_labels=io.loadmat('data/Shen268_yeo_RS7.mat')['yeoROIs'].flatten()
 
 rois_ind_all=[np.load('./results/task_tr_rest_tr/task_tr_resting_ts_'+ str(fold)+'.npz')['rois_ids'] for fold in range(50)]
@@ -363,12 +268,12 @@ nodes_acc = np.mean(nodes_acc, axis=0)
 
 vmax = max(nodes_acc)
 vmin = min(nodes_acc)
+#we use 1mm resolution for a finner result
+img =  image.load_img("./data/atlas/shen_1mm_268_parcellation.nii.gz")
 for i in range(1,10):
     
-    #we use 1mm resolution for a finner result
-    img =  image.load_img("./data/atlas/shen_1mm_268_parcellation.nii.gz")
     
-    a = img.get_data()
+    a = img.get_data().copy()
     sub = np.where(rsn_labels==i)[0] + 1
     
     
@@ -396,5 +301,4 @@ for i in range(1,10):
                                   symmetric_cbar=False)
         
     display.savefig("./plots/" + class_names[i-1]+"_glass_brain.png", dpi=300)
-    display.savefig("./plots/" + class_names[i-1]+"_glass_brain.eps", dpi=300)
     display.close()
