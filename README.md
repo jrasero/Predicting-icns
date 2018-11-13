@@ -1,5 +1,8 @@
 # Predicting functional networks from region connectivity profiles in task-based versus resting-state fMRI data
 
+<p align="center">
+  <img src="https://github.com/jrasero/Predicting-icns/blob/master/docs/glass_together.png">
+</p>
 
 ## Description:
 Code written in python and used for downloading and preprocessing the data and generating results and plots of the work:
@@ -7,7 +10,6 @@ Code written in python and used for downloading and preprocessing the data and g
 **Predicting functional networks from region connectivity profiles in task-based versus resting-state fMRI data**  
 *Javier Rasero, Hannelore Aerts, Marlis Ontivero Ortega, Jesus M. Cortes, Sebastiano Stramaglia, Daniele Marinazzo*  
 bioRxiv 259077, that can be found in the link: https://doi.org/10.1371/journal.pone.0207385
-
 
 ## Software Requirements:
 
