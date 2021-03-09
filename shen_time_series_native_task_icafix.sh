@@ -21,7 +21,7 @@ do
     file_relative_path=MNINonLinear/Results/tfMRI_MOTOR_LR/tfMRI_MOTOR_LR.nii.gz
     output_file=data/data_task_icafix/sub-$subject/temp/tfMRI_MOTOR_LR.nii.gz
 
-    if curl -u jrasero:hcp667333202 -o $output_file --fail $subject_url_prefix/$file_relative_path; then
+    if curl -u jrasero:mypassword -o $output_file --fail $subject_url_prefix/$file_relative_path; then
 	echo "URL for file exist"
     else
 	echo "$subject does not have file $file_relative_path" >> data_task_icafix/temp.log
@@ -32,7 +32,7 @@ do
     file_relative_path=MNINonLinear/xfms/standard2acpc_dc.nii.gz
     output_file=data/data_task_icafix/sub-$subject/temp/standard2acpc_dc.nii.gz
 
-    if curl -u jrasero:hcp667333202 -o $output_file --fail $subject_url_prefix/$file_relative_path; then
+    if curl -u jrasero:mypassword -o $output_file --fail $subject_url_prefix/$file_relative_path; then
 	echo "URL for file exist"
     else
 	echo "$subject does not have file $file_relative_path" >> data_task_icafix/temp.log
@@ -43,7 +43,7 @@ do
     file_relative_path=T1w/T1w_acpc_dc.nii.gz
     output_file=data/data_task_icafix/sub-$subject/temp/T1w_acpc_dc.nii.gz
 
-    if curl -u jrasero:hcp667333202 -o $output_file --fail $subject_url_prefix/$file_relative_path; then
+    if curl -u jrasero:mypassword -o $output_file --fail $subject_url_prefix/$file_relative_path; then
 	echo "URL for file exist"
     else
 	echo "$subject does not have file $file_relative_path" >> data_task_icafix/temp.log
@@ -54,9 +54,7 @@ do
     file_relative_path=MNINonLinear/Results/tfMRI_MOTOR_LR/Movement_Regressors.txt
     output_file=data/data_task_icafix/sub-$subject/temp/Movement_Regressors.txt
 
-    #curl -u jrasero:hcp667333202 -o $output_file $subject_url_prefix/$file_relative_path
-
-    if curl -u jrasero:hcp667333202 -o $output_file --fail $subject_url_prefix/$file_relative_path; then
+    if curl -u jrasero:mypassword -o $output_file --fail $subject_url_prefix/$file_relative_path; then
 	echo "URL for file exist"
     else
 	echo "$subject does not have file $file_relative_path" >> data/data_task_icafix/temp.log
@@ -68,7 +66,7 @@ do
     output_file=data/data_task_icafix/sub-$subject/temp/T1w_restore_brain.nii.gz
 
 
-    if curl -u jrasero:hcp667333202 -o $output_file --fail $subject_url_prefix/$file_relative_path; then
+    if curl -u jrasero:mypassword -o $output_file --fail $subject_url_prefix/$file_relative_path; then
 	echo "URL for file exist"
     else
 	echo "$subject does not have file $file_relative_path" >> data/data_task_icafix/temp.log
@@ -79,7 +77,7 @@ do
     file_relative_path=MNINonLinear/wmparc.nii.gz
     output_file=data/data_task_icafix/sub-$subject/temp/wmparc.nii.gz
 
-    if curl -u jrasero:hcp667333202 -o $output_file --fail $subject_url_prefix/$file_relative_path; then
+    if curl -u jrasero:mypassword -o $output_file --fail $subject_url_prefix/$file_relative_path; then
 	echo "URL for file exist"
     else
 	echo "$subject does not have file $file_relative_path" >> data/data_task_icafix/temp.log
